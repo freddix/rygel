@@ -1,11 +1,11 @@
 Summary:	Home media solution (UPnP AV MediaServer)
 Name:		rygel
-Version:	0.17.5.1
-Release:	2
+Version:	0.17.7
+Release:	1
 License:	LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.17/%{name}-%{version}.tar.xz
-# Source0-md5:	a757933f282d172e778b69744dc0720c
+# Source0-md5:	95e644ffda0f42ed95adc388eaef6f13
 URL:		https://live.gnome.org/Rygel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -13,7 +13,7 @@ BuildRequires:	gssdp-devel
 BuildRequires:	gstreamer-plugins-base-devel
 BuildRequires:	gtk+3-devel
 BuildRequires:	gupnp-av-devel
-BuildRequires:	gupnp-dlna-devel
+BuildRequires:	gupnp-dlna-devel >= 0.9.4
 BuildRequires:	intltool
 BuildRequires:	libgee-devel
 BuildRequires:	libsoup-devel
@@ -69,8 +69,19 @@ Requires:	tracker
 %description plugin-tracker
 Media export plugin using Tracker
 
+%package apidocs
+Summary:	API documentation
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+Rygel libraries API documentation.
+
 %prep
 %setup -q
+
+# hardcoded gtk-doc dir
+%{__sed} -i "s|gtk-doc/html|doc/gtk-doc/html|" doc/reference/doc-build.am
 
 %build
 %{__intltoolize}
@@ -82,8 +93,7 @@ Media export plugin using Tracker
 %configure \
 	--disable-silent-rules		\
 	--enable-gst-launch-plugin	\
-	--enable-mediathek-plugin	\
-	--with-html-dir=%{_gtkdocdir}
+	--enable-mediathek-plugin
 %{__make}
 
 %install
@@ -160,4 +170,8 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-tracker
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/rygel-2.0/plugins/librygel-tracker.so
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/librygel-*
 
