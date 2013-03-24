@@ -1,11 +1,11 @@
 Summary:	Home media solution (UPnP AV MediaServer)
 Name:		rygel
-Version:	0.17.9
+Version:	0.17.10
 Release:	1
 License:	LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.17/%{name}-%{version}.tar.xz
-# Source0-md5:	b1b7f73357a70f0b91c04c38fda09e61
+# Source0-md5:	7f902fc2222181f21fb6a85b96974f9a
 URL:		https://live.gnome.org/Rygel
 BuildRequires:	autoconf
 BuildRequires:	automake
