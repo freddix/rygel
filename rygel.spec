@@ -1,11 +1,11 @@
 Summary:	Home media solution (UPnP AV MediaServer)
 Name:		rygel
-Version:	0.20.0
+Version:	0.20.1
 Release:	1
 License:	LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.20/%{name}-%{version}.tar.xz
-# Source0-md5:	7583935dd8e60b5db0d73db99f2258a6
+# Source0-md5:	1621cd63519c8bf9cccd8a1a51d982fd
 URL:		https://live.gnome.org/Rygel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -129,6 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/rygel-2.0/engines
 %attr(755,root,root) %{_libdir}/rygel-2.0/engines/librygel-media-engine-gst.so
 %attr(755,root,root) %{_libdir}/rygel-2.0/engines/librygel-media-engine-simple.so
+%{_libdir}/rygel-2.0/engines/*.plugin
 
 %dir %{_libdir}/rygel-2.0/plugins
 %attr(755,root,root) %{_libdir}/rygel-2.0/plugins/librygel-external.so
@@ -137,6 +138,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/rygel-2.0/plugins/librygel-mediathek.so
 %attr(755,root,root) %{_libdir}/rygel-2.0/plugins/librygel-mpris.so
 %attr(755,root,root) %{_libdir}/rygel-2.0/plugins/librygel-playbin.so
+%{_libdir}/rygel-2.0/plugins/*.plugin
+
 %{_datadir}/dbus-1/services/org.gnome.Rygel1.service
 %{_datadir}/rygel
 %{_desktopdir}/rygel-preferences.desktop
