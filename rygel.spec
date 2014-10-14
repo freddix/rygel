@@ -1,17 +1,17 @@
 Summary:	Home media solution (UPnP AV MediaServer)
 Name:		rygel
-Version:	0.22.1
+Version:	0.24.1
 Release:	1
 License:	LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.22/%{name}-%{version}.tar.xz
-# Source0-md5:	07076ed41ed38eb39f7e19b07e1eaf32
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.24/%{name}-%{version}.tar.xz
+# Source0-md5:	6a101abfc417ed47f63871cabc24b126
 URL:		https://live.gnome.org/Rygel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gssdp-devel
 BuildRequires:	gstreamer-plugins-base-devel
-BuildRequires:	gtk+3-devel >= 3.12.0
+BuildRequires:	gtk+3-devel >= 3.14.0
 BuildRequires:	gupnp-av-devel
 BuildRequires:	gupnp-dlna-devel >= 0.9.4
 BuildRequires:	intltool
@@ -35,6 +35,8 @@ Suggests:	gstreamer-plugins-bad
 Suggests:	gstreamer-plugins-good
 Suggests:	gstreamer-plugins-ugly
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		apiver	2.4
 
 %description
 Rygel is a home media solution that allows you to easily share audio,
@@ -125,20 +127,20 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rygel
 %attr(755,root,root) %{_bindir}/rygel-preferences
 
-%dir %{_libdir}/rygel-2.2
-%dir %{_libdir}/rygel-2.2/engines
-%attr(755,root,root) %{_libdir}/rygel-2.2/engines/librygel-media-engine-gst.so
-%attr(755,root,root) %{_libdir}/rygel-2.2/engines/librygel-media-engine-simple.so
-%{_libdir}/rygel-2.2/engines/*.plugin
+%dir %{_libdir}/rygel-%{apiver}
+%dir %{_libdir}/rygel-%{apiver}/engines
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/engines/librygel-media-engine-gst.so
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/engines/librygel-media-engine-simple.so
+%{_libdir}/rygel-%{apiver}/engines/*.plugin
 
-%dir %{_libdir}/rygel-2.2/plugins
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-external.so
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-gst-launch.so
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-media-export.so
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-mediathek.so
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-mpris.so
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-playbin.so
-%{_libdir}/rygel-2.2/plugins/*.plugin
+%dir %{_libdir}/rygel-%{apiver}/plugins
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/plugins/librygel-external.so
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/plugins/librygel-gst-launch.so
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/plugins/librygel-media-export.so
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/plugins/librygel-mediathek.so
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/plugins/librygel-mpris.so
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/plugins/librygel-playbin.so
+%{_libdir}/rygel-%{apiver}/plugins/*.plugin
 
 %{_datadir}/dbus-1/services/org.gnome.Rygel1.service
 %{_datadir}/rygel
@@ -150,29 +152,35 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %ghost %{_libdir}/librygel-core-2.2.so.2
-%attr(755,root,root) %ghost %{_libdir}/librygel-server-2.2.so.2
-%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-2.2.so.2
-%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-gst-2.2.so.2
-%attr(755,root,root) %{_libdir}/librygel-core-2.2.so.*.*.*
-%attr(755,root,root) %{_libdir}/librygel-renderer-2.2.so.*.*.*
-%attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.2.so.*.*.*
-%attr(755,root,root) %{_libdir}/librygel-server-2.2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librygel-core-%{apiver}.so.2
+%attr(755,root,root) %ghost %{_libdir}/librygel-server-%{apiver}.so.2
+%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-%{apiver}.so.2
+%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-gst-%{apiver}.so.2
+%attr(755,root,root) %{_libdir}/librygel-core-%{apiver}.so.*.*.*
+%attr(755,root,root) %{_libdir}/librygel-renderer-%{apiver}.so.*.*.*
+%attr(755,root,root) %{_libdir}/librygel-renderer-gst-%{apiver}.so.*.*.*
+%attr(755,root,root) %{_libdir}/librygel-server-%{apiver}.so.*.*.*
+%{_libdir}/girepository-1.0/RygelCore-%{apiver}.typelib
+%{_libdir}/girepository-1.0/RygelRenderer-%{apiver}.typelib
+%{_libdir}/girepository-1.0/RygelServer-%{apiver}.typelib
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/librygel-core-2.2.so
-%attr(755,root,root) %{_libdir}/librygel-renderer-2.2.so
-%attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.2.so
-%attr(755,root,root) %{_libdir}/librygel-server-2.2.so
-%{_includedir}/rygel-2.2
+%attr(755,root,root) %{_libdir}/librygel-core-%{apiver}.so
+%attr(755,root,root) %{_libdir}/librygel-renderer-%{apiver}.so
+%attr(755,root,root) %{_libdir}/librygel-renderer-gst-%{apiver}.so
+%attr(755,root,root) %{_libdir}/librygel-server-%{apiver}.so
+%{_includedir}/rygel-%{apiver}
 %{_pkgconfigdir}/*.pc
+%{_datadir}/gir-1.0/RygelCore-%{apiver}.gir
+%{_datadir}/gir-1.0/RygelRenderer-%{apiver}.gir
+%{_datadir}/gir-1.0/RygelServer-%{apiver}.gir
 %{_datadir}/vala/vapi/*.deps
 %{_datadir}/vala/vapi/*.vapi
 
 %files plugin-tracker
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-tracker.so
+%attr(755,root,root) %{_libdir}/rygel-%{apiver}/plugins/librygel-tracker.so
 
 %files apidocs
 %defattr(644,root,root,755)
